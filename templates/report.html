@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Results - AI Coach</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>Interview Performance Report</h1>
+            <p class="subtitle">Role: <strong>{{ session_data.job_role }}</strong> | Completed: {{ session_data.created_at }}</p>
+
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th style="width: 30%;">Question</th>
+                        <th style="width: 30%;">Your Answer</th>
+                        <th style="width: 15%;">Score</th>
+                        <th style="width: 15%;">Difficulty</th>
+                        <th style="width: 25%;">Feedback</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in answers %}
+                    <tr>
+                        <td><strong>{{ item.question_text }}</strong></td>
+                        <td>{{ item.answer_text }}</td>
+                        <td>
+                            {% set label = item.score_label | lower %}
+                            {% if label == 'excellent' %}
+                                <span class="badge badge-excellent">Excellent</span>
+                            {% elif label == 'good' %}
+                                <span class="badge badge-good">Good</span>
+                            {% elif label == 'average' %}
+                                <span class="badge badge-average">Average</span>
+                            {% else %}
+                                <span class="badge badge-poor">Poor</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ item.difficulty }}</td>
+                        <td>{{ item.feedback_text }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div style="text-align: center; margin-top: 24px;">
+                <a href="{{ url_for('index') }}" class="btn btn-primary">Start New Interview Session</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

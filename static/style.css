@@ -1,0 +1,197 @@
+/* Clean, Minimal Centered Card Styling */
+
+:root {
+    --bg: #f8fafc;
+    --text: #0f172a;
+    --text-muted: #64748b;
+    --card-bg: #ffffff;
+    --border: #e2e8f0;
+
+    --primary: #4f46e5;
+    --primary-hover: #4338ca;
+
+    --excellent: #16a34a;
+    --excellent-bg: #dcfce7;
+    --good: #2563eb;
+    --good-bg: #dbeafe;
+    --average: #d97706;
+    --average-bg: #fef3c7;
+    --poor: #dc2626;
+    --poor-bg: #fee2e2;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+}
+
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-align: center;
+    color: var(--text);
+}
+
+.subtitle {
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    font-size: 1rem;
+}
+
+/* Role Selection Buttons */
+.role-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 14px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+.btn-outline:hover {
+    background-color: #eef2ff;
+}
+
+/* Interview Progress & Form */
+.progress-text {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.question-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+textarea {
+    width: 100%;
+    min-height: 150px;
+    padding: 14px;
+    font-size: 1rem;
+    font-family: inherit;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    outline: none;
+    resize: vertical;
+}
+
+textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+/* Results Table */
+.results-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.95rem;
+}
+
+.results-table th,
+.results-table td {
+    padding: 14px;
+    border: 1px solid var(--border);
+    text-align: left;
+    vertical-align: top;
+}
+
+.results-table th {
+    background-color: #f1f5f9;
+    font-weight: 600;
+    color: var(--text);
+}
+
+/* Score Label Badges */
+.badge {
+    display: inline-block;
+    padding: 4px 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-radius: 6px;
+    text-transform: uppercase;
+}
+
+.badge-excellent {
+    background-color: var(--excellent-bg);
+    color: var(--excellent);
+}
+
+.badge-good {
+    background-color: var(--good-bg);
+    color: var(--good);
+}
+
+.badge-average {
+    background-color: var(--average-bg);
+    color: var(--average);
+}
+
+.badge-poor {
+    background-color: var(--poor-bg);
+    color: var(--poor);
+}

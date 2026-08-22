@@ -1,0 +1,161 @@
+ID,Job Role,Question Type,Category,Question,Answer,Label
+1,General/HR,Behavioral,Adaptability,Tell me about a time you had to learn something completely new quickly.,"I'm always eager to learn and embrace change as a way to improve. For example, I once had to switch to a new tech stack and picked it up quickly.",Excellent
+2,General/HR,Behavioral,Adaptability,Tell me about a time you had to learn something completely new quickly.,I'm always eager to learn and embrace change as a way to improve.,Good
+3,General/HR,Behavioral,Adaptability,Tell me about a time you had to learn something completely new quickly.,I'm always eager to learn and embrace change...,Average
+4,General/HR,Behavioral,Adaptability,Tell me about a time you had to learn something completely new quickly.,I'm not really sure how to answer that.,Poor
+5,General/HR,Behavioral,Conflict Resolution,Describe a time you handled a difficult situation professionally.,"When faced with conflict, I approach it calmly and try to understand all perspectives before finding a solution together.",Excellent
+6,General/HR,Behavioral,Conflict Resolution,Describe a time you handled a difficult situation professionally.,"When faced with conflict, I approach it calmly and try to understand all perspectives before finding a solution together.",Good
+7,General/HR,Behavioral,Conflict Resolution,Describe a time you handled a difficult situation professionally.,"When faced with conflict, I approach it calmly...",Average
+8,General/HR,Behavioral,Conflict Resolution,Describe a time you handled a difficult situation professionally.,I'm not really sure how to answer that.,Poor
+9,General/HR,Behavioral,Career Goals,Where do you see yourself in 5 years?,My long-term goal is to grow into a senior role where I can contribute more strategically and mentor others. This role brings me closer to that.,Excellent
+10,General/HR,Behavioral,Career Goals,Where do you see yourself in 5 years?,My long-term goal is to grow into a senior role where I can contribute more strategically and mentor others.,Good
+11,General/HR,Behavioral,Career Goals,Where do you see yourself in 5 years?,My long-term goal is to grow into a...,Average
+12,General/HR,Behavioral,Career Goals,Where do you see yourself in 5 years?,I guess I just try to do my best.,Poor
+13,General/HR,Behavioral,Conflict Resolution,Tell me about a conflict you had with a coworker and how you resolved it.,"When faced with conflict, I approach it calmly and try to understand all perspectives before finding a solution together.",Excellent
+14,General/HR,Behavioral,Conflict Resolution,Tell me about a conflict you had with a coworker and how you resolved it.,"When faced with conflict, I approach it calmly and try to understand all perspectives before finding a solution together.",Good
+15,General/HR,Behavioral,Conflict Resolution,Tell me about a conflict you had with a coworker and how you resolved it.,"When faced with conflict, I approach it calmly...",Average
+16,General/HR,Behavioral,Conflict Resolution,Tell me about a conflict you had with a coworker and how you resolved it.,I don't have a specific example in mind.,Poor
+17,General/HR,Behavioral,Career Goals,What skills do you hope to develop in your next role?,My long-term goal is to grow into a senior role where I can contribute more strategically and mentor others. This role brings me closer to that.,Excellent
+18,General/HR,Behavioral,Career Goals,What skills do you hope to develop in your next role?,My long-term goal is to grow into a senior role where I can contribute more strategically and mentor others.,Good
+19,General/HR,Behavioral,Career Goals,What skills do you hope to develop in your next role?,My long-term goal is to grow into a...,Average
+20,General/HR,Behavioral,Career Goals,What skills do you hope to develop in your next role?,I don't have a specific example in mind.,Poor
+21,General/HR,Behavioral,Adaptability,What's the most significant change you've had to adapt to at work?,"I'm always eager to learn and embrace change as a way to improve. For example, I once had to switch to a new tech stack and picked it up quickly.",Excellent
+22,General/HR,Behavioral,Adaptability,What's the most significant change you've had to adapt to at work?,I'm always eager to learn and embrace change as a way to improve.,Good
+23,General/HR,Behavioral,Adaptability,What's the most significant change you've had to adapt to at work?,I'm always eager to learn and embrace change...,Average
+24,General/HR,Behavioral,Adaptability,What's the most significant change you've had to adapt to at work?,I don't have a specific example in mind.,Poor
+25,General/HR,Behavioral,Career Goals,How does this role fit into your career path?,My long-term goal is to grow into a senior role where I can contribute more strategically and mentor others. This role brings me closer to that.,Excellent
+26,General/HR,Behavioral,Career Goals,How does this role fit into your career path?,My long-term goal is to grow into a senior role where I can contribute more strategically and mentor others.,Good
+27,General/HR,Behavioral,Career Goals,How does this role fit into your career path?,My long-term goal is to grow into a...,Average
+28,General/HR,Behavioral,Career Goals,How does this role fit into your career path?,I'm not really sure how to answer that.,Poor
+29,General/HR,Behavioral,Team Collaboration,Tell me about a time you worked well within a team.,"I believe communication and mutual respect are key to successful collaboration. In one project, we achieved X because of great teamwork.",Excellent
+30,General/HR,Behavioral,Team Collaboration,Tell me about a time you worked well within a team.,I believe communication and mutual respect are key to successful collaboration.,Good
+31,General/HR,Behavioral,Team Collaboration,Tell me about a time you worked well within a team.,I believe communication and mutual respect are key...,Average
+32,General/HR,Behavioral,Team Collaboration,Tell me about a time you worked well within a team.,"It's hard to explain, I just get through it.",Poor
+33,General/HR,Behavioral,Culture Fit,What are your expectations from leadership in a company?,"I thrive in collaborative, transparent environments where innovation and respect are valued.",Excellent
+34,General/HR,Behavioral,Culture Fit,What are your expectations from leadership in a company?,"I thrive in collaborative, transparent environments where innovation and respect are valued.",Good
+35,General/HR,Behavioral,Culture Fit,What are your expectations from leadership in a company?,"I thrive in collaborative, transparent environments where innovation...",Average
+36,General/HR,Behavioral,Culture Fit,What are your expectations from leadership in a company?,I'm not really sure how to answer that.,Poor
+37,General/HR,Behavioral,Motivation,What motivates you to come to work every day?,I'm motivated by challenges and the opportunity to grow both personally and professionally.,Excellent
+38,General/HR,Behavioral,Motivation,What motivates you to come to work every day?,I'm motivated by challenges and the opportunity to grow both personally and professionally.,Good
+39,General/HR,Behavioral,Motivation,What motivates you to come to work every day?,I'm motivated by challenges and the opportunity to...,Average
+40,General/HR,Behavioral,Motivation,What motivates you to come to work every day?,"It's hard to explain, I just get through it.",Poor
+41,General/HR,Behavioral,Leadership,How do you motivate others in a leadership role?,"I lead by example and encourage open communication and accountability. One time, I led a team through X and we achieved Y.",Excellent
+42,General/HR,Behavioral,Leadership,How do you motivate others in a leadership role?,I lead by example and encourage open communication and accountability.,Good
+43,General/HR,Behavioral,Leadership,How do you motivate others in a leadership role?,I lead by example and encourage open communication...,Average
+44,General/HR,Behavioral,Leadership,How do you motivate others in a leadership role?,"Not sure, I haven't really thought about it.",Poor
+45,General/HR,Behavioral,Work Style,What tools or methods help you stay organized?,I follow a structured workflow and use tools like Jira/Trello/Notion to manage my tasks efficiently.,Excellent
+46,General/HR,Behavioral,Work Style,What tools or methods help you stay organized?,I follow a structured workflow and use tools like Jira/Trello/Notion to manage my tasks efficiently.,Good
+47,General/HR,Behavioral,Work Style,What tools or methods help you stay organized?,I follow a structured workflow and use tools...,Average
+48,General/HR,Behavioral,Work Style,What tools or methods help you stay organized?,I'm not really sure how to answer that.,Poor
+49,General/HR,Behavioral,Team Collaboration,How do you build trust with new teammates?,"I believe communication and mutual respect are key to successful collaboration. In one project, we achieved X because of great teamwork.",Excellent
+50,General/HR,Behavioral,Team Collaboration,How do you build trust with new teammates?,I believe communication and mutual respect are key to successful collaboration.,Good
+51,General/HR,Behavioral,Team Collaboration,How do you build trust with new teammates?,I believe communication and mutual respect are key...,Average
+52,General/HR,Behavioral,Team Collaboration,How do you build trust with new teammates?,I'm not really sure how to answer that.,Poor
+53,General/HR,Behavioral,Culture Fit,Describe a time you felt out of place in a workplace culture.,"I thrive in collaborative, transparent environments where innovation and respect are valued.",Excellent
+54,General/HR,Behavioral,Culture Fit,Describe a time you felt out of place in a workplace culture.,"I thrive in collaborative, transparent environments where innovation and respect are valued.",Good
+55,General/HR,Behavioral,Culture Fit,Describe a time you felt out of place in a workplace culture.,"I thrive in collaborative, transparent environments where innovation...",Average
+56,General/HR,Behavioral,Culture Fit,Describe a time you felt out of place in a workplace culture.,I'm not really sure how to answer that.,Poor
+57,General/HR,Behavioral,Work Style,Do you prefer working independently or in teams? Why?,I follow a structured workflow and use tools like Jira/Trello/Notion to manage my tasks efficiently.,Excellent
+58,General/HR,Behavioral,Work Style,Do you prefer working independently or in teams? Why?,I follow a structured workflow and use tools like Jira/Trello/Notion to manage my tasks efficiently.,Good
+59,General/HR,Behavioral,Work Style,Do you prefer working independently or in teams? Why?,I follow a structured workflow and use tools...,Average
+60,General/HR,Behavioral,Work Style,Do you prefer working independently or in teams? Why?,I don't have a specific example in mind.,Poor
+61,General/HR,Behavioral,Leadership,Describe a time you led a project or team.,"I lead by example and encourage open communication and accountability. One time, I led a team through X and we achieved Y.",Excellent
+62,General/HR,Behavioral,Leadership,Describe a time you led a project or team.,I lead by example and encourage open communication and accountability.,Good
+63,General/HR,Behavioral,Leadership,Describe a time you led a project or team.,I lead by example and encourage open communication...,Average
+64,General/HR,Behavioral,Leadership,Describe a time you led a project or team.,I don't have a specific example in mind.,Poor
+65,General/HR,Behavioral,Leadership,How do you delegate tasks effectively?,"I lead by example and encourage open communication and accountability. One time, I led a team through X and we achieved Y.",Excellent
+66,General/HR,Behavioral,Leadership,How do you delegate tasks effectively?,I lead by example and encourage open communication and accountability.,Good
+67,General/HR,Behavioral,Leadership,How do you delegate tasks effectively?,I lead by example and encourage open communication...,Average
+68,General/HR,Behavioral,Leadership,How do you delegate tasks effectively?,"It's hard to explain, I just get through it.",Poor
+69,General/HR,Behavioral,Culture Fit,How do you align with our company values?,"I thrive in collaborative, transparent environments where innovation and respect are valued.",Excellent
+70,General/HR,Behavioral,Culture Fit,How do you align with our company values?,"I thrive in collaborative, transparent environments where innovation and respect are valued.",Good
+71,General/HR,Behavioral,Culture Fit,How do you align with our company values?,"I thrive in collaborative, transparent environments where innovation...",Average
+72,General/HR,Behavioral,Culture Fit,How do you align with our company values?,"It's hard to explain, I just get through it.",Poor
+73,General/HR,Behavioral,Motivation,Why do you want to work at our company?,I'm motivated by challenges and the opportunity to grow both personally and professionally.,Excellent
+74,General/HR,Behavioral,Motivation,Why do you want to work at our company?,I'm motivated by challenges and the opportunity to grow both personally and professionally.,Good
+75,General/HR,Behavioral,Motivation,Why do you want to work at our company?,I'm motivated by challenges and the opportunity to...,Average
+76,General/HR,Behavioral,Motivation,Why do you want to work at our company?,I'm not really sure how to answer that.,Poor
+77,General/HR,Behavioral,Leadership,What makes a good leader in your opinion?,"I lead by example and encourage open communication and accountability. One time, I led a team through X and we achieved Y.",Excellent
+78,General/HR,Behavioral,Leadership,What makes a good leader in your opinion?,I lead by example and encourage open communication and accountability.,Good
+79,General/HR,Behavioral,Leadership,What makes a good leader in your opinion?,I lead by example and encourage open communication...,Average
+80,General/HR,Behavioral,Leadership,What makes a good leader in your opinion?,"It's hard to explain, I just get through it.",Poor
+81,General/HR,Behavioral,Career Goals,What are your long-term career aspirations?,My long-term goal is to grow into a senior role where I can contribute more strategically and mentor others. This role brings me closer to that.,Excellent
+82,General/HR,Behavioral,Career Goals,What are your long-term career aspirations?,My long-term goal is to grow into a senior role where I can contribute more strategically and mentor others.,Good
+83,General/HR,Behavioral,Career Goals,What are your long-term career aspirations?,My long-term goal is to grow into a...,Average
+84,General/HR,Behavioral,Career Goals,What are your long-term career aspirations?,I don't have a specific example in mind.,Poor
+85,General/HR,Behavioral,Work Style,Describe your ideal workday.,I follow a structured workflow and use tools like Jira/Trello/Notion to manage my tasks efficiently.,Excellent
+86,General/HR,Behavioral,Work Style,Describe your ideal workday.,I follow a structured workflow and use tools like Jira/Trello/Notion to manage my tasks efficiently.,Good
+87,General/HR,Behavioral,Work Style,Describe your ideal workday.,I follow a structured workflow and use tools...,Average
+88,General/HR,Behavioral,Work Style,Describe your ideal workday.,"It's hard to explain, I just get through it.",Poor
+89,General/HR,Behavioral,Conflict Resolution,How do you deal with feedback that you disagree with?,"When faced with conflict, I approach it calmly and try to understand all perspectives before finding a solution together.",Excellent
+90,General/HR,Behavioral,Conflict Resolution,How do you deal with feedback that you disagree with?,"When faced with conflict, I approach it calmly and try to understand all perspectives before finding a solution together.",Good
+91,General/HR,Behavioral,Conflict Resolution,How do you deal with feedback that you disagree with?,"When faced with conflict, I approach it calmly...",Average
+92,General/HR,Behavioral,Conflict Resolution,How do you deal with feedback that you disagree with?,"Not sure, I haven't really thought about it.",Poor
+93,General/HR,Behavioral,Team Collaboration,What role do you usually play in group settings?,"I believe communication and mutual respect are key to successful collaboration. In one project, we achieved X because of great teamwork.",Excellent
+94,General/HR,Behavioral,Team Collaboration,What role do you usually play in group settings?,I believe communication and mutual respect are key to successful collaboration.,Good
+95,General/HR,Behavioral,Team Collaboration,What role do you usually play in group settings?,I believe communication and mutual respect are key...,Average
+96,General/HR,Behavioral,Team Collaboration,What role do you usually play in group settings?,I don't have a specific example in mind.,Poor
+97,General/HR,Behavioral,Conflict Resolution,What would you do if you disagreed with your manager?,"When faced with conflict, I approach it calmly and try to understand all perspectives before finding a solution together.",Excellent
+98,General/HR,Behavioral,Conflict Resolution,What would you do if you disagreed with your manager?,"When faced with conflict, I approach it calmly and try to understand all perspectives before finding a solution together.",Good
+99,General/HR,Behavioral,Conflict Resolution,What would you do if you disagreed with your manager?,"When faced with conflict, I approach it calmly...",Average
+100,General/HR,Behavioral,Conflict Resolution,What would you do if you disagreed with your manager?,"Not sure, I haven't really thought about it.",Poor
+101,General/HR,Behavioral,Motivation,Tell me about a time you were highly motivated to achieve a goal.,I'm motivated by challenges and the opportunity to grow both personally and professionally.,Excellent
+102,General/HR,Behavioral,Motivation,Tell me about a time you were highly motivated to achieve a goal.,I'm motivated by challenges and the opportunity to grow both personally and professionally.,Good
+103,General/HR,Behavioral,Motivation,Tell me about a time you were highly motivated to achieve a goal.,I'm motivated by challenges and the opportunity to...,Average
+104,General/HR,Behavioral,Motivation,Tell me about a time you were highly motivated to achieve a goal.,"It's hard to explain, I just get through it.",Poor
+105,General/HR,Behavioral,Culture Fit,How do you contribute to a positive team environment?,"I thrive in collaborative, transparent environments where innovation and respect are valued.",Excellent
+106,General/HR,Behavioral,Culture Fit,How do you contribute to a positive team environment?,"I thrive in collaborative, transparent environments where innovation and respect are valued.",Good
+107,General/HR,Behavioral,Culture Fit,How do you contribute to a positive team environment?,"I thrive in collaborative, transparent environments where innovation...",Average
+108,General/HR,Behavioral,Culture Fit,How do you contribute to a positive team environment?,I guess I just try to do my best.,Poor
+109,General/HR,Behavioral,Motivation,What drives your passion for this field?,I'm motivated by challenges and the opportunity to grow both personally and professionally.,Excellent
+110,General/HR,Behavioral,Motivation,What drives your passion for this field?,I'm motivated by challenges and the opportunity to grow both personally and professionally.,Good
+111,General/HR,Behavioral,Motivation,What drives your passion for this field?,I'm motivated by challenges and the opportunity to...,Average
+112,General/HR,Behavioral,Motivation,What drives your passion for this field?,I'm not really sure how to answer that.,Poor
+113,General/HR,Behavioral,Adaptability,How do you react to sudden changes in priorities?,"I'm always eager to learn and embrace change as a way to improve. For example, I once had to switch to a new tech stack and picked it up quickly.",Excellent
+114,General/HR,Behavioral,Adaptability,How do you react to sudden changes in priorities?,I'm always eager to learn and embrace change as a way to improve.,Good
+115,General/HR,Behavioral,Adaptability,How do you react to sudden changes in priorities?,I'm always eager to learn and embrace change...,Average
+116,General/HR,Behavioral,Adaptability,How do you react to sudden changes in priorities?,I don't have a specific example in mind.,Poor
+117,General/HR,Behavioral,Conflict Resolution,How do you respond when a teammate isn't pulling their weight?,"When faced with conflict, I approach it calmly and try to understand all perspectives before finding a solution together.",Excellent
+118,General/HR,Behavioral,Conflict Resolution,How do you respond when a teammate isn't pulling their weight?,"When faced with conflict, I approach it calmly and try to understand all perspectives before finding a solution together.",Good
+119,General/HR,Behavioral,Conflict Resolution,How do you respond when a teammate isn't pulling their weight?,"When faced with conflict, I approach it calmly...",Average
+120,General/HR,Behavioral,Conflict Resolution,How do you respond when a teammate isn't pulling their weight?,"Not sure, I haven't really thought about it.",Poor
+121,General/HR,Behavioral,Leadership,Tell me about a time you mentored someone.,"I lead by example and encourage open communication and accountability. One time, I led a team through X and we achieved Y.",Excellent
+122,General/HR,Behavioral,Leadership,Tell me about a time you mentored someone.,I lead by example and encourage open communication and accountability.,Good
+123,General/HR,Behavioral,Leadership,Tell me about a time you mentored someone.,I lead by example and encourage open communication...,Average
+124,General/HR,Behavioral,Leadership,Tell me about a time you mentored someone.,I guess I just try to do my best.,Poor
+125,General/HR,Behavioral,Work Style,How do you ensure productivity when working remotely?,I follow a structured workflow and use tools like Jira/Trello/Notion to manage my tasks efficiently.,Excellent
+126,General/HR,Behavioral,Work Style,How do you ensure productivity when working remotely?,I follow a structured workflow and use tools like Jira/Trello/Notion to manage my tasks efficiently.,Good
+127,General/HR,Behavioral,Work Style,How do you ensure productivity when working remotely?,I follow a structured workflow and use tools...,Average
+128,General/HR,Behavioral,Work Style,How do you ensure productivity when working remotely?,I guess I just try to do my best.,Poor
+129,General/HR,Behavioral,Motivation,How do you stay motivated during repetitive tasks?,I'm motivated by challenges and the opportunity to grow both personally and professionally.,Excellent
+130,General/HR,Behavioral,Motivation,How do you stay motivated during repetitive tasks?,I'm motivated by challenges and the opportunity to grow both personally and professionally.,Good
+131,General/HR,Behavioral,Motivation,How do you stay motivated during repetitive tasks?,I'm motivated by challenges and the opportunity to...,Average
+132,General/HR,Behavioral,Motivation,How do you stay motivated during repetitive tasks?,I don't have a specific example in mind.,Poor
+133,General/HR,Behavioral,Work Style,How do you organize and prioritize your daily tasks?,I follow a structured workflow and use tools like Jira/Trello/Notion to manage my tasks efficiently.,Excellent
+134,General/HR,Behavioral,Work Style,How do you organize and prioritize your daily tasks?,I follow a structured workflow and use tools like Jira/Trello/Notion to manage my tasks efficiently.,Good
+135,General/HR,Behavioral,Work Style,How do you organize and prioritize your daily tasks?,I follow a structured workflow and use tools...,Average
+136,General/HR,Behavioral,Work Style,How do you organize and prioritize your daily tasks?,I don't have a specific example in mind.,Poor
+137,General/HR,Behavioral,Culture Fit,What type of company culture do you thrive in?,"I thrive in collaborative, transparent environments where innovation and respect are valued.",Excellent
+138,General/HR,Behavioral,Culture Fit,What type of company culture do you thrive in?,"I thrive in collaborative, transparent environments where innovation and respect are valued.",Good
+139,General/HR,Behavioral,Culture Fit,What type of company culture do you thrive in?,"I thrive in collaborative, transparent environments where innovation...",Average
+140,General/HR,Behavioral,Culture Fit,What type of company culture do you thrive in?,I guess I just try to do my best.,Poor
+141,General/HR,Behavioral,Team Collaboration,How do you handle disagreements within a team?,"I believe communication and mutual respect are key to successful collaboration. In one project, we achieved X because of great teamwork.",Excellent
+142,General/HR,Behavioral,Team Collaboration,How do you handle disagreements within a team?,I believe communication and mutual respect are key to successful collaboration.,Good
+143,General/HR,Behavioral,Team Collaboration,How do you handle disagreements within a team?,I believe communication and mutual respect are key...,Average
+144,General/HR,Behavioral,Team Collaboration,How do you handle disagreements within a team?,I'm not really sure how to answer that.,Poor
+145,General/HR,Behavioral,Team Collaboration,Describe a project where teamwork was essential to success.,"I believe communication and mutual respect are key to successful collaboration. In one project, we achieved X because of great teamwork.",Excellent
+146,General/HR,Behavioral,Team Collaboration,Describe a project where teamwork was essential to success.,I believe communication and mutual respect are key to successful collaboration.,Good
+147,General/HR,Behavioral,Team Collaboration,Describe a project where teamwork was essential to success.,I believe communication and mutual respect are key...,Average
+148,General/HR,Behavioral,Team Collaboration,Describe a project where teamwork was essential to success.,I'm not really sure how to answer that.,Poor
+149,General/HR,Behavioral,Adaptability,Describe a time you failed and what you learned from it.,"I'm always eager to learn and embrace change as a way to improve. For example, I once had to switch to a new tech stack and picked it up quickly.",Excellent
+150,General/HR,Behavioral,Adaptability,Describe a time you failed and what you learned from it.,I'm always eager to learn and embrace change as a way to improve.,Good
+151,General/HR,Behavioral,Adaptability,Describe a time you failed and what you learned from it.,I'm always eager to learn and embrace change...,Average
+152,General/HR,Behavioral,Adaptability,Describe a time you failed and what you learned from it.,"Not sure, I haven't really thought about it.",Poor
+153,General/HR,Behavioral,Adaptability,How do you stay updated with industry trends?,"I'm always eager to learn and embrace change as a way to improve. For example, I once had to switch to a new tech stack and picked it up quickly.",Excellent
+154,General/HR,Behavioral,Adaptability,How do you stay updated with industry trends?,I'm always eager to learn and embrace change as a way to improve.,Good
+155,General/HR,Behavioral,Adaptability,How do you stay updated with industry trends?,I'm always eager to learn and embrace change...,Average
+156,General/HR,Behavioral,Adaptability,How do you stay updated with industry trends?,I'm not really sure how to answer that.,Poor
+157,General/HR,Behavioral,Career Goals,What kind of growth opportunities are you looking for?,My long-term goal is to grow into a senior role where I can contribute more strategically and mentor others. This role brings me closer to that.,Excellent
+158,General/HR,Behavioral,Career Goals,What kind of growth opportunities are you looking for?,My long-term goal is to grow into a senior role where I can contribute more strategically and mentor others.,Good
+159,General/HR,Behavioral,Career Goals,What kind of growth opportunities are you looking for?,My long-term goal is to grow into a...,Average
+160,General/HR,Behavioral,Career Goals,What kind of growth opportunities are you looking for?,I guess I just try to do my best.,Poor

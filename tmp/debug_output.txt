@@ -1,0 +1,2 @@
+CLEANED TEXT: 'denormalization duplicates data avoid joins improving read performance risking consistency issues trade speed storage'
+ALL NONZERO TERMS FOR THIS DOCUMENT: [('read', np.float64(0.42723203753719496)), ('denormalization', np.float64(0.39825671801977636)), ('issues', np.float64(0.39825671801977636)), ('consistency', np.float64(0.3487230821342331)), ('improving', np.float64(0.34300307569347827)), ('storage', np.float64(0.32383241323409895)), ('performance', np.float64(0.3158840145891857)), ('data', np.float64(0.23737505918622379))]
