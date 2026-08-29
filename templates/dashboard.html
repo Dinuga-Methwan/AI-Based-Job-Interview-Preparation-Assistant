@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - AI Interview Readiness Coach</title>
+    <!-- Include Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-color: #0A0F1E; }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-200 antialiased selection:bg-indigo-500 selection:text-white pb-20">
+    
+    <!-- Top Navigation -->
+    <nav class="w-full flex justify-between items-center px-6 sm:px-12 py-4 border-b border-slate-800/50 bg-[#0A0F1E]/80 backdrop-blur-md sticky top-0 z-50">
+        <span class="text-xl font-extrabold tracking-tight text-white flex items-center gap-2">
+            <div class="w-6 h-6 rounded-md bg-indigo-500/20 flex items-center justify-center">
+                <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+            </div>
+            READINESS.COACH
+        </span>
+        <a href="{{ url_for('logout') }}" class="text-sm font-semibold text-slate-400 hover:text-white transition-colors">
+            Logout
+        </a>
+    </nav>
+
+    <main class="w-full max-w-6xl mx-auto px-6 mt-12 space-y-16 relative z-10">
+        
+        <!-- Welcome & Stats Header -->
+        <section>
+            <h1 class="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-8">Welcome back, {{ current_user.username if current_user.is_authenticated else 'Engineer' }}</h1>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <div class="bg-slate-900/60 backdrop-blur-md border border-slate-800 rounded-2xl p-6 shadow-lg shadow-slate-900/20">
+                    <div class="text-slate-400 text-sm font-medium mb-2">Interviews Completed</div>
+                    <div class="text-3xl font-bold text-white">{{ interviews_completed|default(0) }}</div>
+                </div>
+                <div class="bg-slate-900/60 backdrop-blur-md border border-slate-800 rounded-2xl p-6 shadow-lg shadow-slate-900/20">
+                    <div class="text-slate-400 text-sm font-medium mb-2">Average Score</div>
+                    <div class="text-3xl font-bold text-white">{{ average_score|default(0) }}%</div>
+                </div>
+                <div class="bg-slate-900/60 backdrop-blur-md border border-slate-800 rounded-2xl p-6 shadow-lg shadow-slate-900/20">
+                    <div class="text-slate-400 text-sm font-medium mb-2">Current Streak</div>
+                    <div class="text-3xl font-bold text-emerald-400 flex items-center gap-2">
+                        3 Days 🔥
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Assessment Selection Flow -->
+        <section id="flow-container">
+            <!-- STEP 1: Select Job Role -->
+            <div id="step-1">
+                <h2 class="text-2xl font-bold text-white tracking-tight mb-2">1. Select a Job Role</h2>
+                <p class="text-slate-400 mb-6">Choose the specific career track you are preparing for.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Software Engineer -->
+                    <button onclick="selectRole('Software Engineer')" class="text-left group bg-[#0D1326] border border-slate-800 hover:border-indigo-500/50 rounded-3xl p-6 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-lg relative overflow-hidden">
+                        <div class="w-10 h-10 bg-indigo-500/20 rounded-xl flex items-center justify-center shadow-inner mb-4">
+                            <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Software Engineer</h3>
+                        <p class="text-slate-500 text-sm">Full-stack, backend, and systems architecture.</p>
+                    </button>
+
+                    <!-- Data Analyst (Future) -->
+                    <button onclick="selectRole('Data Analyst')" class="text-left group bg-[#0D1326] border border-slate-800 hover:border-blue-500/50 rounded-3xl p-6 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-lg relative overflow-hidden">
+                        <div class="w-10 h-10 bg-blue-500/20 rounded-xl flex items-center justify-center shadow-inner mb-4">
+                            <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Data Analyst</h3>
+                        <p class="text-slate-500 text-sm">SQL querying, pandas, and data visualization.</p>
+                    </button>
+
+                    <!-- Product Manager (Future) -->
+                    <button onclick="selectRole('Product Manager')" class="text-left group bg-[#0D1326] border border-slate-800 hover:border-emerald-500/50 rounded-3xl p-6 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-lg relative overflow-hidden">
+                        <div class="w-10 h-10 bg-emerald-500/20 rounded-xl flex items-center justify-center shadow-inner mb-4">
+                            <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Product Manager</h3>
+                        <p class="text-slate-500 text-sm">Strategy, roadmaps, and stakeholder alignment.</p>
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 2: Select Assessment (Hidden initially) -->
+            <div id="step-2" class="hidden">
+                <div class="flex items-center gap-4 mb-2">
+                    <button onclick="goBack()" class="w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                    </button>
+                    <h2 class="text-2xl font-bold text-white tracking-tight">2. Select Assessment Type</h2>
+                </div>
+                <p class="text-slate-400 mb-6 pl-12 flex items-center gap-2">
+                    Start a mock interview for: <span id="selected-role-name" class="font-semibold text-indigo-400">Software Engineer</span>
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Technical Assessment -->
+                    <a id="technical-link" href="#" class="block group bg-[#0D1326] border border-slate-800 hover:border-indigo-500/50 rounded-3xl p-8 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_-5px_rgba(99,102,241,0.3)] relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-64 h-64 bg-indigo-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 group-hover:bg-indigo-500/10 transition-colors pointer-events-none"></div>
+                        <div class="flex items-center gap-4 mb-6 relative z-10">
+                            <div class="w-12 h-12 bg-indigo-500/20 rounded-xl flex items-center justify-center shadow-inner">
+                                <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white">Technical Assessment</h3>
+                        </div>
+                        <p class="text-slate-400 text-sm leading-relaxed relative z-10">
+                            Role-specific technical evaluation focused on domain expertise, critical thinking, and applied knowledge.
+                        </p>
+                    </a>
+
+                    <!-- Behavioral & HR -->
+                    <a href="{{ url_for('interview', role='General/HR') }}" class="block group bg-[#0D1326] border border-slate-800 hover:border-violet-500/50 rounded-3xl p-8 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_-5px_rgba(139,92,246,0.3)] relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-64 h-64 bg-violet-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 group-hover:bg-violet-500/10 transition-colors pointer-events-none"></div>
+                        <div class="flex items-center gap-4 mb-6 relative z-10">
+                            <div class="w-12 h-12 bg-violet-500/20 rounded-xl flex items-center justify-center shadow-inner">
+                                <svg class="w-6 h-6 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white">Behavioral & HR</h3>
+                        </div>
+                        <p class="text-slate-400 text-sm leading-relaxed relative z-10">
+                            Focuses entirely on culture fit, the STAR method framework, tone analysis, empathy, and clear communication.
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent History -->
+        <section>
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold text-white tracking-tight">Recent Reports</h2>
+                <button class="text-sm font-medium text-indigo-400 hover:text-indigo-300 transition-colors">View All</button>
+            </div>
+            
+            <div class="bg-[#0D1326] border border-slate-800 rounded-2xl overflow-hidden shadow-lg">
+                <div class="divide-y divide-slate-800/80">
+                    
+                    {% for session in recent_sessions %}
+                    <div class="p-6 flex items-center justify-between hover:bg-slate-800/40 transition-colors cursor-pointer group" onclick="window.location.href='{{ url_for('report', session_id=session.id) }}'">
+                        <div class="flex items-center gap-4 border-l-2 border-transparent group-hover:border-indigo-500 pl-2 transition-all">
+                            <div class="w-10 h-10 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                            </div>
+                            <div>
+                                <div class="text-white font-medium mb-1">{{ session.job_role }}</div>
+                                <div class="text-slate-400 text-xs">{{ session.created_at[:10] if session.created_at else '' }} &bull; {{ session.question_count }} Questions</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold">
+                                Score: {{ session.average_score }}/100
+                            </div>
+                            <svg class="w-5 h-5 text-slate-600 group-hover:text-indigo-400 transition-colors transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="p-6 text-slate-400 text-center">No recent sessions found. Take an assessment to see your history!</div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <script>
+        function selectRole(role) {
+            // Hide Step 1, Show Step 2
+            document.getElementById('step-1').classList.add('hidden');
+            document.getElementById('step-2').classList.remove('hidden');
+            
+            // Update UI text
+            document.getElementById('selected-role-name').innerText = role;
+
+            // Generate base URL for Technical Assessment
+            // Uses standard Flask route formatting but injects the selected role
+            const techLink = document.getElementById('technical-link');
+            techLink.href = "/interview?role=" + encodeURIComponent(role);
+        }
+
+        function goBack() {
+            // Hide Step 2, Show Step 1
+            document.getElementById('step-2').classList.add('hidden');
+            document.getElementById('step-1').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

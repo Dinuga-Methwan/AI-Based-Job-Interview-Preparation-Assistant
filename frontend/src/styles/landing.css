@@ -1,0 +1,165 @@
+/* Readiness Coach — landing page styles
+   Fonts (Space Grotesk, Inter, JetBrains Mono) are loaded via <link> tags
+   in index.html, not @import here — keeps first paint fast. */
+
+.irc-root{
+  --bg:#F6F7F9;
+  --bg-alt:#F0EEFB;
+  --bg-elev:#FFFFFF;
+  --border:#E4E7EC;
+  --border-strong:#D0D5DD;
+  --text:#101828;
+  --dim:#5D6B82;
+  --accent:#6C4CF1;
+  --accent-strong:#4C2FD1;
+  --accent-tint:#F1EDFE;
+  --accent-soft:#D2C4FB;
+  --ink:#120B24;
+  --ink-elev:#1C1438;
+  --ink-border:#332856;
+  --on-dark:#F3F5F8;
+  --on-dark-dim:#9C93B8;
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter',sans-serif;
+  min-height:100vh;
+}
+.irc-root *{box-sizing:border-box;}
+.irc-display{font-family:'Space Grotesk',sans-serif;}
+.irc-mono{font-family:'JetBrains Mono',monospace;}
+
+.irc-nav-pill{
+  background:rgba(255,255,255,0.97); backdrop-filter:blur(10px);
+  border:1px solid var(--border); box-shadow:0 8px 24px -14px rgba(16,24,40,0.25);
+  border-radius:999px;
+}
+.irc-btn-primary{
+  background:var(--accent); color:#FFFFFF; font-weight:600;
+  transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.irc-btn-primary:hover{ transform:translateY(-1px); box-shadow:0 10px 24px -8px rgba(108,76,241,0.45); background:var(--accent-strong); }
+.irc-btn-ghost-dark{ border:1px solid rgba(255,255,255,0.18); color:var(--on-dark); transition:border-color .15s ease, background .15s ease; }
+.irc-btn-ghost-dark:hover{ border-color:rgba(255,255,255,0.35); background:rgba(255,255,255,0.06); }
+.irc-btn-ghost{ border:1px solid var(--border-strong); color:var(--text); transition:border-color .15s ease, background .15s ease; }
+.irc-btn-ghost:hover{ border-color:#9AA6B8; background:#FFFFFF; }
+.irc-btn-white{ background:#fff; color:var(--ink); font-weight:600; transition:transform .15s ease; }
+.irc-btn-white:hover{ transform:translateY(-1px); }
+
+.irc-hero-card{
+  background:
+    radial-gradient(ellipse 90% 80% at 15% -10%, #2E2158 0%, transparent 60%),
+    radial-gradient(ellipse 70% 60% at 100% 10%, #241A45 0%, transparent 55%),
+    var(--ink);
+  border:1px solid var(--ink-border);
+  position:relative; overflow:hidden;
+}
+.irc-hero-grid{
+  position:absolute; inset:0; pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size:56px 56px;
+  mask-image:radial-gradient(ellipse 70% 60% at 20% 20%, black 30%, transparent 80%);
+}
+.irc-wordmark-bg{
+  position:absolute; top:-38px; left:28px; z-index:0; pointer-events:none; user-select:none;
+  font-family:'Space Grotesk',sans-serif; font-weight:700; letter-spacing:-0.03em;
+  font-size:clamp(90px,14vw,190px); line-height:1; color:rgba(255,255,255,0.05);
+  white-space:nowrap;
+}
+
+.irc-card{ background:var(--bg-elev); border:1px solid var(--border); box-shadow:0 1px 2px rgba(16,24,40,0.04); }
+.irc-card-hover{ transition:border-color .2s ease, transform .2s ease, box-shadow .2s ease; }
+.irc-card-hover:hover{ border-color:var(--border-strong); transform:translateY(-2px); box-shadow:0 12px 24px -12px rgba(16,24,40,0.12); }
+
+.irc-console{
+  background:linear-gradient(180deg, #FFFFFF 0%, #FBFBFD 100%);
+  border:1px solid var(--border);
+  box-shadow:0 40px 80px -30px rgba(0,0,0,0.5);
+}
+.irc-dot{ width:7px; height:7px; border-radius:999px; }
+.irc-live-dot{
+  width:6px;height:6px;border-radius:999px;background:var(--accent);
+  animation:irc-pulse 2s infinite;
+}
+@keyframes irc-pulse{
+  0%{box-shadow:0 0 0 0 rgba(108,76,241,0.45);}
+  70%{box-shadow:0 0 0 8px rgba(108,76,241,0);}
+  100%{box-shadow:0 0 0 0 rgba(108,76,241,0);}
+}
+.irc-chip{
+  font-family:'JetBrains Mono',monospace; font-size:11px; padding:4px 9px; border-radius:6px;
+  border:1px solid var(--border); color:var(--dim); background:#FFFFFF;
+  opacity:0; animation:irc-fadein .4s ease forwards;
+}
+@keyframes irc-fadein{ to{ opacity:1; transform:translateY(0); } from{ transform:translateY(4px); } }
+
+.irc-ring-track{ stroke:var(--border); fill:none; }
+.irc-ring-progress{ stroke:var(--accent); fill:none; stroke-linecap:round; transition:stroke-dashoffset 1.4s cubic-bezier(.16,1,.3,1); }
+
+.irc-diff-pill{
+  font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:600; letter-spacing:0.04em;
+  padding:5px 10px; border-radius:999px; transition:all .3s ease;
+}
+
+.irc-num{
+  font-family:'JetBrains Mono',monospace; color:var(--dim); font-size:13px; background:#FFFFFF;
+  border:1px solid var(--border); border-radius:8px; width:36px; height:36px;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.irc-step-line{ background:linear-gradient(180deg, var(--border), transparent); width:1px; }
+
+.irc-pill-tag{
+  display:inline-flex; align-items:center; gap:7px; padding:8px 15px; border-radius:999px;
+  border:1px solid var(--border); background:#FFFFFF; font-size:12.5px; color:var(--text);
+  box-shadow:0 1px 2px rgba(16,24,40,0.03);
+}
+.irc-pill-dot{ width:5px; height:5px; border-radius:999px; background:var(--accent); flex-shrink:0; }
+
+.irc-bento{
+  position:relative; border-radius:18px; overflow:hidden; border:1px solid var(--ink-border);
+  background:linear-gradient(150deg, var(--ink-elev) 0%, var(--ink) 100%);
+  min-height:220px; display:flex; flex-direction:column; justify-content:flex-end; padding:20px;
+  transition:transform .2s ease, border-color .2s ease;
+}
+.irc-bento:hover{ transform:translateY(-3px); border-color:#4a3b78; }
+.irc-bento-icon{ position:absolute; top:18px; right:18px; opacity:0.14; }
+.irc-bento-tag{
+  font-family:'JetBrains Mono',monospace; font-size:10px; padding:4px 9px; border-radius:999px;
+  background:rgba(255,255,255,0.1); color:#fff; border:1px solid rgba(255,255,255,0.16);
+  display:inline-block; margin-bottom:10px; width:fit-content;
+}
+
+.irc-band-card{ border-radius:28px; background:var(--bg-alt); border:1px solid var(--border); padding:48px 36px; }
+.irc-arrow-btn{
+  width:40px; height:40px; border-radius:999px; border:1px solid var(--border-strong);
+  display:flex; align-items:center; justify-content:center; background:#fff; color:var(--text);
+  transition:border-color .15s ease, background .15s ease;
+}
+.irc-arrow-btn:hover{ border-color:var(--accent); background:var(--accent-tint); }
+
+.irc-badge-circle{
+  width:52px; height:52px; border-radius:999px; display:flex; align-items:center; justify-content:center;
+  background:var(--accent-tint); border:1px solid var(--accent-soft); flex-shrink:0;
+}
+.irc-stack-card{
+  border-radius:16px; padding:20px; display:flex; gap:14px; align-items:flex-start;
+  background:var(--ink-elev); border:1px solid var(--ink-border);
+}
+
+.irc-cta-band{
+  background:radial-gradient(ellipse 60% 100% at 50% 0%, rgba(108,76,241,0.12), transparent 70%), var(--bg-elev);
+  border:1px solid var(--border);
+}
+.irc-solid-cta{
+  background:linear-gradient(150deg, var(--accent) 0%, var(--accent-strong) 100%);
+  border-radius:18px; padding:28px; display:flex; flex-direction:column; justify-content:space-between;
+}
+
+/* Respect users who've asked for less motion */
+@media (prefers-reduced-motion: reduce){
+  .irc-live-dot, .irc-chip, .irc-bento, .irc-card-hover, .irc-ring-progress{
+    animation:none !important;
+    transition:none !important;
+  }
+}

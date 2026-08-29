@@ -4,34 +4,103 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interview Session - AI Coach</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Include Tailwind CSS via CDN to match the dark glassmorphism of landing/dashboard -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    </style>
 </head>
-<body>
-    <div class="container">
-        <div class="card">
-            <div class="progress-text">Question {{ current_num }} of {{ total_questions }}</div>
-            
-            {% if error_message %}
-            <div class="error-banner" style="background-color: #fee2e2; border: 1px solid #f87171; color: #991b1b; padding: 12px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 0.95rem; font-weight: 500;">
-                ⚠️ {{ error_message }}
+<body class="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-6 antialiased selection:bg-indigo-500 selection:text-white relative">
+
+    <!-- Ambient Glow Background -->
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-violet-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <div class="w-full max-w-3xl relative z-10 flex flex-col bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-3xl p-8 sm:p-12 shadow-2xl">
+        
+        <!-- Top Status Bar -->
+        <div class="flex items-center justify-between border-b border-slate-800/80 pb-6 mb-8">
+            <div class="text-indigo-400 font-bold uppercase tracking-widest text-sm flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse hidden sm:block"></span>
+                {{ role }} Track
             </div>
-            {% endif %}
-
-            <h2 class="question-title">{{ question.question_text }}</h2>
-
-            <form action="{{ url_for('submit_answer') }}" method="POST">
-                <input type="hidden" name="session_id" value="{{ session_id }}">
-                <input type="hidden" name="question_id" value="{{ question.id }}">
-
-                <div class="form-group">
-                    <textarea name="answer_text" placeholder="Type your answer here..." required autofocus>{{ previous_answer if previous_answer else '' }}</textarea>
-                </div>
-
-                <div style="text-align: right;">
-                    <button type="submit" class="btn btn-primary">Submit Answer</button>
-                </div>
-            </form>
+            <div class="text-slate-400 text-sm font-semibold tracking-widest uppercase bg-slate-800/50 px-4 py-1.5 rounded-full border border-slate-700/50 shadow-inner">
+                Question {{ current_num }} of {{ total_questions }}
+            </div>
         </div>
+        
+        {% if error_message %}
+        <!-- Error Banner -->
+        <div class="bg-red-500/10 border border-red-500/20 text-red-400 px-4 py-3 rounded-xl mb-6 flex items-start gap-3">
+            <svg class="w-5 h-5 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span class="font-medium text-sm">{{ error_message }}</span>
+        </div>
+        {% endif %}
+
+        <!-- Question Title -->
+        <h2 class="text-3xl font-extrabold text-white mb-8 leading-tight">
+            {{ question.question_text }}
+        </h2>
+
+        <!-- Answer Form -->
+        <form id="interview-form" action="{{ url_for('submit_answer') }}" method="POST" class="flex flex-col flex-grow">
+            <input type="hidden" name="session_id" value="{{ session_id }}">
+            <input type="hidden" name="question_id" value="{{ question.id }}">
+
+            <textarea 
+                id="answer_text"
+                name="answer_text" 
+                placeholder="Type your answer here... Be as detailed as possible." 
+                class="w-full h-64 bg-slate-950/50 border border-slate-700 rounded-2xl p-6 text-slate-200 text-lg focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors resize-none placeholder-slate-600 shadow-inner"
+                required 
+                autofocus
+            >{{ previous_answer if previous_answer else '' }}</textarea>
+
+            <button 
+                id="submit-btn"
+                type="submit" 
+                class="mt-8 w-full bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-bold py-4 rounded-xl transition-all shadow-lg flex justify-center items-center gap-2 group border border-indigo-500/30"
+            >
+                <span id="btn-text">Submit Answer for AI Evaluation</span>
+                <svg id="btn-icon" class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                
+                <!-- Spinner SVG hidden by default -->
+                <svg id="btn-spinner" class="w-5 h-5 animate-spin hidden" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+            </button>
+        </form>
     </div>
+
+    <!-- Client-side script to handle loading UI without blocking Flask POST -->
+    <script>
+        const form = document.getElementById('interview-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const btnText = document.getElementById('btn-text');
+        const btnIcon = document.getElementById('btn-icon');
+        const btnSpinner = document.getElementById('btn-spinner');
+        const textarea = document.getElementById('answer_text');
+
+        form.addEventListener('submit', function() {
+            // Only trigger loading state if form is valid (handles 'required' attribute)
+            if (form.checkValidity()) {
+                // Must use setTimeout to allow HTML5 form submission to actually fire before locking the UI
+                setTimeout(() => {
+                    // Lock Textarea visually
+                    textarea.classList.add('opacity-50', 'pointer-events-none');
+                    
+                    // Transform Button into pulse state
+                    submitBtn.classList.remove('bg-gradient-to-r', 'from-indigo-600', 'to-violet-600', 'hover:from-indigo-500', 'hover:to-violet-500', 'border', 'border-indigo-500/30');
+                    submitBtn.classList.add('animate-pulse', 'bg-indigo-500/50', 'cursor-wait');
+                    
+                    btnText.innerText = 'AI is evaluating...';
+                    btnIcon.classList.add('hidden');
+                    btnSpinner.classList.remove('hidden');
+                }, 10);
+            }
+        });
+    </script>
 </body>
 </html>

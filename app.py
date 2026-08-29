@@ -1,7 +1,9 @@
 import os
+from flask import send_from_directory, abort
 import sqlite3
 from flask import Flask, render_template, request, redirect, url_for, g, flash
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
+from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 
@@ -9,32 +11,22 @@ from ai.scorer import score_answer
 from ai.feedback_engine import get_next_difficulty
 from ai.feedback_engine import get_feedback
 from extensions import get_db, User, admin_required, DB_PATH, QUESTIONS_PER_SESSION, login_manager
+from flask_cors import CORS
 
 app = Flask(__name__)
+# Enable CORS for all API routes
+CORS(app, resources={r'/api/*': {'origins': '*'}}, supports_credentials=True)
 app.secret_key = 'ai-interview-coach-secret-key'
 login_manager.init_app(app)
 
-
-
-# Initialize Users table if not exists
-# init_user_table() moved below get_db definition
-# init_user_table definition moved later
-
-# init_user_table() call moved to before_first_request
-
-
-
-
-
-
-
-
-
+# Database cleanup
 
 def close_db(exception):
     db = g.pop('db', None)
     if db is not None:
         db.close()
+
+# Initialize user table
 
 def init_user_table():
     """Create Users table if it does not already exist."""
@@ -54,25 +46,65 @@ def init_user_table():
 with app.app_context():
     init_user_table()
 
-
-# ---------- User model and authentication helpers ----------
-
-
-
-
-
+# Register API blueprint with /api prefix
 from api import api_bp
 app.register_blueprint(api_bp, url_prefix='/api')
 
 
-
-
-
 @app.route('/')
+def landing():
+    """Public marketing landing page (no login required)."""
+    return render_template('landing.html', current_year=datetime.now().year)
+
+@app.route('/dashboard')
 @login_required
-def index():
-    """Job role selection page after login."""
-    return render_template('index.html')
+def dashboard():
+    db = get_db()
+    
+    # Total completed interview sessions for this user (only count sessions that have at least 1 answer)
+    interviews_completed = db.execute("""
+        SELECT COUNT(DISTINCT s.id) FROM Sessions s
+        JOIN UserAnswers ua ON ua.session_id = s.id
+        WHERE s.user_id = ?
+    """, (current_user.id,)).fetchone()[0]
+    
+    # Average score across all this user's answers
+    score_map = {'Excellent': 100, 'Good': 80, 'Average': 55, 'Poor': 25}
+    rows = db.execute("""
+        SELECT ua.score_label FROM UserAnswers ua
+        JOIN Sessions s ON ua.session_id = s.id
+        WHERE s.user_id = ?
+    """, (current_user.id,)).fetchall()
+    scores = [score_map.get(r['score_label'], 0) for r in rows]
+    average_score = round(sum(scores) / len(scores)) if scores else 0
+    
+    # Recent sessions with their own average score, most recent first, only ones with answers
+    recent_sessions_raw = db.execute("""
+        SELECT s.id, s.job_role, s.created_at, COUNT(ua.id) as question_count
+        FROM Sessions s
+        JOIN UserAnswers ua ON ua.session_id = s.id
+        WHERE s.user_id = ?
+        GROUP BY s.id
+        ORDER BY s.created_at DESC
+        LIMIT 5
+    """, (current_user.id,)).fetchall()
+    
+    recent_sessions = []
+    for s in recent_sessions_raw:
+        session_scores = db.execute("""
+            SELECT score_label FROM UserAnswers WHERE session_id = ?
+        """, (s['id'],)).fetchall()
+        s_scores = [score_map.get(r['score_label'], 0) for r in session_scores]
+        s_avg = round(sum(s_scores) / len(s_scores)) if s_scores else 0
+        recent_sessions.append({
+            'id': s['id'], 'job_role': s['job_role'], 'created_at': s['created_at'],
+            'question_count': s['question_count'], 'average_score': s_avg
+        })
+    
+    return render_template('dashboard.html',
+        interviews_completed=interviews_completed,
+        average_score=average_score,
+        recent_sessions=recent_sessions)
 
 # ---------- Authentication routes ----------
 @app.route('/register', methods=['GET', 'POST'])
@@ -109,7 +141,7 @@ def login():
             login_user(user)
             flash('Logged in successfully.', 'success')
             next_page = request.args.get('next')
-            return redirect(next_page or url_for('index'))
+            return redirect(next_page or url_for('dashboard'))
         flash('Invalid credentials.', 'error')
     return render_template('login.html')
 
@@ -130,6 +162,7 @@ def admin_dashboard():
 
 
 @app.route('/interview')
+@login_required
 def interview():
     """
     Starts or continues an interview session.
@@ -137,37 +170,30 @@ def interview():
     """
     role = request.args.get('role', 'Software Engineer')
     session_id = request.args.get('session_id', type=int)
-    
+
     db = get_db()
-    
-    # Create new session if no valid session_id is provided
+
     if not session_id:
         cursor = db.cursor()
-        cursor.execute("INSERT INTO Sessions (job_role) VALUES (?);", (role,))
+        cursor.execute("INSERT INTO Sessions (job_role, user_id) VALUES (?, ?);", (role, current_user.id))
         db.commit()
         session_id = cursor.lastrowid
         return redirect(url_for('interview', role=role, session_id=session_id))
-    
-    # Retrieve current difficulty for the session
+
     session_row = db.execute("SELECT current_difficulty FROM Sessions WHERE id = ?;", (session_id,)).fetchone()
     current_difficulty = session_row['current_difficulty'] if session_row else 'Medium'
-    
-    # Debug print
+
     print(f"[DEBUG] Session {session_id} current difficulty: {current_difficulty}")
-    
-    # Check how many questions have been answered in this session
+
     answered_count = db.execute(
         "SELECT COUNT(*) FROM UserAnswers WHERE session_id = ?;",
         (session_id,)
     ).fetchone()[0]
-    
-    # If limit reached, finish session and go to report
+
     if answered_count >= QUESTIONS_PER_SESSION:
         return redirect(url_for('report', session_id=session_id))
-    
-    # Helper to attempt fetching a question at a given difficulty
+
     def fetch_question(diff):
-        # Log which difficulty is being used for the next question selection
         print(f"[DEBUG] Selecting next question with difficulty filter: {diff}")
         return db.execute("""
             SELECT id, job_role, question_type, category, question_text 
@@ -178,22 +204,17 @@ def interview():
             ORDER BY RANDOM() 
             LIMIT 1;
         """, (role, diff, session_id)).fetchone()
-    
-    # Try current difficulty first
+
     question_row = fetch_question(current_difficulty)
-    # If none, fallback to nearest difficulty levels
     if not question_row:
         difficulties = ['Easy', 'Medium', 'Hard']
-        # Order by distance from current difficulty
         idx = difficulties.index(current_difficulty)
         fallback_order = [d for i, d in enumerate(difficulties) if i != idx]
-        # Simple fallback: try other difficulties in order
         for diff in fallback_order:
             question_row = fetch_question(diff)
             if question_row:
                 break
-    
-    # If still no question, go to report
+
     if not question_row:
         return redirect(url_for('report', session_id=session_id))
 
@@ -218,12 +239,7 @@ def interview():
 @app.route('/submit_answer', methods=['POST'])
 def submit_answer():
     """
-    Handles user answer submission:
-    - Validates answer length (must be at least 3 words)
-    - Runs scoring logic via ai.scorer module
-    - Retrieves rule-based feedback via ai.feedback_engine module
-    - Saves answer, score, and feedback to UserAnswers table
-    - Redirects to next question or session report
+    Handles user answer submission.
     """
     session_id = request.form.get('session_id', type=int)
     question_id = request.form.get('question_id', type=int)
@@ -231,17 +247,15 @@ def submit_answer():
 
     db = get_db()
 
-    # Fetch question details and session job_role
     q_row = db.execute("SELECT id, job_role, question_type, category, question_text FROM Questions WHERE id = ?;", (question_id,)).fetchone()
     s_row = db.execute("SELECT job_role FROM Sessions WHERE id = ?;", (session_id,)).fetchone()
 
     if not q_row or not s_row:
-        return redirect(url_for('index'))
+        return redirect(url_for('dashboard'))
 
     category = q_row['category']
     role = s_row['job_role']
 
-    # Validation: Check if answer is empty or fewer than 3 words
     words = answer_text.split()
     if len(words) < 3:
         answered_count = db.execute(
@@ -267,28 +281,22 @@ def submit_answer():
             previous_answer=answer_text
         )
 
-    # 1. Score answer using AI scorer module
     score_label, similarity_score = score_answer(question_id, answer_text, db_path=DB_PATH)
-
-    # 2. Generate feedback using AI feedback engine module
     feedback_text = get_feedback(score_label, category)
 
-    # 3. Save result to UserAnswers
     db.execute("""
         INSERT INTO UserAnswers (session_id, question_id, answer_text, score_label, feedback_text)
         VALUES (?, ?, ?, ?, ?);
     """, (session_id, question_id, answer_text, score_label, feedback_text))
-    
-    # 4. Update session difficulty
+
     current_diff = db.execute("SELECT current_difficulty FROM Sessions WHERE id = ?;", (session_id,)).fetchone()['current_difficulty']
     new_difficulty = get_next_difficulty(current_diff, score_label)
     db.execute("UPDATE Sessions SET current_difficulty = ? WHERE id = ?;", (new_difficulty, session_id))
     db.commit()
-    
+
     updated_diff = db.execute("SELECT current_difficulty FROM Sessions WHERE id = ?;", (session_id,)).fetchone()['current_difficulty']
     print(f"[DEBUG] Session {session_id}: Updated difficulty to {updated_diff}")
 
-    # Check answered count
     answered_count = db.execute(
         "SELECT COUNT(*) FROM UserAnswers WHERE session_id = ?;",
         (session_id,)
@@ -296,7 +304,7 @@ def submit_answer():
 
     if answered_count >= QUESTIONS_PER_SESSION:
         return redirect(url_for('report', session_id=session_id))
-    
+
     return redirect(url_for('interview', role=role, session_id=session_id))
 
 @app.route('/report/<int:session_id>')
@@ -311,7 +319,7 @@ def report(session_id):
     ).fetchone()
 
     if not session_row:
-        return redirect(url_for('index'))
+        return redirect(url_for('dashboard'))
 
     session_data = {
         'id': session_row['id'],
@@ -345,5 +353,21 @@ def report(session_id):
     )
 
 
+# ---------- React frontend, served at /app (kept separate from '/' to avoid route conflicts) ----------
+REACT_DIST_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', 'dist')
+
+@app.route('/app')
+@app.route('/app/<path:subpath>')
+def react_app(subpath=''):
+    return send_from_directory(REACT_DIST_DIR, 'index.html')
+
+@app.route('/assets/<path:filename>')
+def react_assets(filename):
+    return send_from_directory(os.path.join(REACT_DIST_DIR, 'assets'), filename)
+with app.app_context():
+    print('REGISTERED ROUTES:')
+    for rule in app.url_map.iter_rules():
+        print(rule, rule.methods)
+
 if __name__ == '__main__':
-    app.run(debug=True, host='127.0.0.1', port=5000)
+    app.run(debug=True, use_reloader=False, host='127.0.0.1', port=5000)

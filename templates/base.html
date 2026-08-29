@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}AI Interview Coach{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/design.css') }}" />
+  <script defer src="{{ url_for('static', filename='js/main.js') }}"></script>
+</head>
+<body>
+  <header class="p-3 border-bottom">
+    <div class="container grid grid-12 align-items-center">
+      <div class="col-span-3">
+        <a href="/" class="text-lg font-semibold" style="color: var(--color-primary);">Interview Coach</a>
+      </div>
+      <nav class="col-span-6 text-center">
+        <a href="/dashboard" class="mx-2">Dashboard</a>
+        <a href="/library" class="mx-2">Library</a>
+        <a href="/analytics" class="mx-2">Analytics</a>
+      </nav>
+      <div class="col-span-3 text-right">
+        {% if current_user.is_authenticated %}
+        <a href="/profile" class="mx-2">{{ current_user.username }}</a>
+        <a href="/logout" class="btn btn-outline mx-2">Logout</a>
+        {% else %}
+        <a href="/login" class="btn btn-outline mx-2">Login</a>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+
+  <main class="container mt-4">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="p-3 mt-5 text-center" style="color: var(--color-secondary); font-size: var(--font-size-sm);">
+    © {{ current_year }} Interview Coach. All rights reserved.
+  </footer>
+</body>
+</html>

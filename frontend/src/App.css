@@ -1,0 +1,79 @@
+/* Simple clean login styling */
+:root {
+  --primary: #4F46E5; /* indigo */
+  --primary-hover: #4338CA;
+  --bg: #f8fafc;
+  --card-bg: #ffffff;
+  --border: #e5e7eb;
+  --text: #1f2937;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 2rem;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
+  text-align: center;
+}
+
+h1 { font-size: 1.8rem; margin-bottom: .5rem; }
+.tagline { font-size: 1rem; margin-bottom: 1.5rem; color: #64748b; }
+
+.form-group { margin-bottom: 1rem; text-align: left; }
+label { display: block; margin-bottom: .3rem; font-weight: 600; }
+input {
+  width: 100%;
+  padding: .5rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.btn {
+  display: inline-block;
+  width: 100%;
+  padding: .75rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color .2s ease;
+}
+.btn-primary { background-color: var(--primary); color: #fff; }
+.btn-primary:hover { background-color: var(--primary-hover); }
+
+.error { background: #fee2e2; color: #dc2626; padding: .5rem; border-radius: 6px; margin-bottom: .5rem; }
+.welcome { background: #dcfce7; color: #16a34a; padding: .5rem; border-radius: 6px; margin-bottom: .5rem; }
+
+@media (max-width: 480px) {
+  .card { padding: 1.5rem; }
+}
+       

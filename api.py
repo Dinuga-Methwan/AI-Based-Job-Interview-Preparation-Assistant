@@ -69,43 +69,48 @@ def api_roles():
     return jsonify({"roles": roles})
 
 @api_bp.route('/interview/start', methods=['POST'])
-@login_required
 def api_interview_start():
-    data = request.get_json() or {}
-    role = data.get('job_role') or 'Software Engineer'
-    db = get_db()
-    cursor = db.cursor()
-    cursor.execute('INSERT INTO Sessions (job_role) VALUES (?);', (role,))
-    db.commit()
-    session_id = cursor.lastrowid
-    # reuse existing interview logic to fetch first question
-    current_difficulty = 'Medium'
-    def fetch_question(diff):
-        return db.execute('''
-            SELECT id, job_role, question_type, category, question_text FROM Questions
-            WHERE job_role = ? AND difficulty = ? AND id NOT IN (
-                SELECT question_id FROM UserAnswers WHERE session_id = ?
-            ) ORDER BY RANDOM() LIMIT 1;''', (role, diff, session_id)).fetchone()
-    question_row = fetch_question(current_difficulty)
-    if not question_row:
-        return jsonify({"error": "No questions available"}), 404
-    question = {
-        "id": question_row['id'],
-        "job_role": question_row['job_role'],
-        "question_type": question_row['question_type'],
-        "category": question_row['category'],
-        "question_text": question_row['question_text']
-    }
-    return jsonify({
-        "session_id": session_id,
-        "question": question,
-        "difficulty": current_difficulty,
-        "question_number": 1,
-        "total_questions": QUESTIONS_PER_SESSION
-    })
-
+    try:
+        data = request.get_json() or {}
+        role = data.get('job_role') or 'Software Engineer'
+        print('[DEBUG] Starting interview for role:', role)
+        db = get_db()
+        cursor = db.cursor()
+        cursor.execute('INSERT INTO Sessions (job_role) VALUES (?);', (role,))
+        db.commit()
+        session_id = cursor.lastrowid
+        print('[DEBUG] Created session_id:', session_id)
+        # reuse existing interview logic to fetch first question
+        current_difficulty = 'Medium'
+        def fetch_question(diff):
+            return db.execute('''
+                SELECT id, job_role, question_type, category, question_text FROM Questions
+                WHERE job_role = ? AND difficulty = ? AND id NOT IN (
+                    SELECT question_id FROM UserAnswers WHERE session_id = ?
+                ) ORDER BY RANDOM() LIMIT 1;''', (role, diff, session_id)).fetchone()
+        question_row = fetch_question(current_difficulty)
+        if not question_row:
+            print('[DEBUG] No question found for role', role, 'difficulty', current_difficulty)
+            return jsonify({"error": "No questions available"}), 404
+        question = {
+            "id": question_row['id'],
+            "job_role": question_row['job_role'],
+            "question_type": question_row['question_type'],
+            "category": question_row['category'],
+            "question_text": question_row['question_text']
+        }
+        return jsonify({
+            "session_id": session_id,
+            "question": question,
+            "difficulty": current_difficulty,
+            "question_number": 1,
+            "total_questions": QUESTIONS_PER_SESSION
+        })
+    except Exception as e:
+        print('[ERROR] Exception in api_interview_start:', e)
+        return jsonify({"error": "Internal server error"}), 500
 @api_bp.route('/interview/answer', methods=['POST'])
-@login_required
+# login_required removed
 def api_interview_answer():
     data = request.get_json() or {}
     session_id = data.get('session_id')
@@ -165,7 +170,7 @@ def api_interview_answer():
     })
 
 @api_bp.route('/report/<int:session_id>', methods=['GET'])
-@login_required
+# login_required removed
 def api_report(session_id):
     db = get_db()
     session_row = db.execute('SELECT id, job_role, created_at FROM Sessions WHERE id = ?;', (session_id,)).fetchone()
