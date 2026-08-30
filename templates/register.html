@@ -35,7 +35,7 @@
 
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
-                    <div class="space-y-3 mb-6">
+                    <div id="flash-messages-container" class="space-y-3 mb-6 transition-opacity duration-1000 ease-in-out">
                         {% for category, message in messages %}
                             <!-- Map Flask categories to Tailwind colors -->
                             {% set border_color = "border-red-500/50" if category == "danger" or category == "error" else "border-indigo-500/50" %}
@@ -47,6 +47,15 @@
                             </div>
                         {% endfor %}
                     </div>
+                    <script>
+                        setTimeout(() => {
+                            const flashContainer = document.getElementById('flash-messages-container');
+                            if (flashContainer) {
+                                flashContainer.style.opacity = '0';
+                                setTimeout(() => flashContainer.style.display = 'none', 1000);
+                            }
+                        }, 4000);
+                    </script>
                 {% endif %}
             {% endwith %}
 

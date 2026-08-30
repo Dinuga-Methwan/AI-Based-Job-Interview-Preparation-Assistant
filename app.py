@@ -131,6 +131,8 @@ def register():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('dashboard'))
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
@@ -139,7 +141,6 @@ def login():
         if user_row and check_password_hash(user_row['password_hash'], password):
             user = User(user_row['id'], user_row['username'], user_row['password_hash'], user_row['role'])
             login_user(user)
-            flash('Logged in successfully.', 'success')
             next_page = request.args.get('next')
             return redirect(next_page or url_for('dashboard'))
         flash('Invalid credentials.', 'error')
@@ -149,8 +150,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    flash('You have been logged out.', 'info')
-    return redirect(url_for('login'))
+    return redirect(url_for('landing'))
 
 # ---------- Admin dashboard ----------
 @app.route('/admin')
